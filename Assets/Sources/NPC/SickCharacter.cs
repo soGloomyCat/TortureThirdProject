@@ -34,7 +34,7 @@ public class SickCharacter : MonoBehaviour
         NeedHangOn?.Invoke(this);
     }
 
-    public void InizializeWay(Transform way, Transform exitWay, Bench bench, TakeIcon takeIcon)
+    public void InizializeParameters(Transform way, Transform exitWay, Bench bench, TakeIcon takeIcon)
     {
         _wayPoints = new List<Transform>();
         _exitWayPoints = new List<Transform>();
