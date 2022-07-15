@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class NPCSpawner : MonoBehaviour
 {
@@ -12,7 +11,6 @@ public class NPCSpawner : MonoBehaviour
     [SerializeField] private List<Transform> _exitWays;
     [SerializeField] private float _cooldownBetweenSpawn;
     [SerializeField] private Bench _bench;
-    [SerializeField] private TakeIcon _takeIcon;
 
     private float _currentTime;
     private int _wayIndex;
@@ -55,7 +53,7 @@ public class NPCSpawner : MonoBehaviour
         else
             tempSick = Instantiate(_sickCharacters[sickCharacterIndex], _spawnPoints[_wayIndex]);
 
-        tempSick.InizializeParameters(_ways[_wayIndex], _exitWays[_wayIndex], _bench, _takeIcon);
+        tempSick.InizializeParameters(_ways[_wayIndex], _exitWays[_wayIndex], _bench);
         SpawnedNewSick?.Invoke(tempSick);
         _spawnedCount++;
     }

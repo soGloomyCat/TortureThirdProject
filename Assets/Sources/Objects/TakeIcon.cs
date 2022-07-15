@@ -13,8 +13,6 @@ public class TakeIcon : MonoBehaviour
     private bool _isActive;
     private bool _isFilled;
 
-    public Image FillIcon => _fillIcon;
-
     public event Action Complete;
 
     public void PrepairActivate(float issueTime)
@@ -65,6 +63,8 @@ public class TakeIcon : MonoBehaviour
         Vector3 tempSize;
         float step;
 
+        _mainIcon.gameObject.SetActive(true);
+        _fillIcon.gameObject.SetActive(true);
         waiter = new WaitForSeconds(0.02f);
         tempSize = new Vector3(1, 1, 1);
         step = 0.1f;
@@ -102,7 +102,8 @@ public class TakeIcon : MonoBehaviour
         }
 
         _isActive = false;
-        gameObject.SetActive(false);
+        _mainIcon.gameObject.SetActive(false);
+        _fillIcon.gameObject.SetActive(false);
     }
 
     private IEnumerator Filling(float issueTime)

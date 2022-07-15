@@ -1,35 +1,27 @@
-using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class HangTransition : Transition
 {
-    private const float Multiplier = 40;
+    private const float Offset = 1.5f;
 
     [SerializeField] private Transform _finalRayPoint;
     [SerializeField] private float _hangTime;
     [SerializeField] private SkinnedMeshRenderer _renderer;
 
-    private TakeIcon _originalTakeIcon;
-    private TakeIcon _tempTakeIcon;
+    private TakeIcon _takeIcon;
     private bool _isDoctorHang;
 
     private void ChangeTransitStatus()
     {
         NeedTransit = true;
-        Destroy(_tempTakeIcon.gameObject);
+        Destroy(_takeIcon.gameObject);
     }
 
     private void Start()
     {
-        _originalTakeIcon = SickCharacter.TakeIcon;
+        _takeIcon = Instantiate(SickCharacter.TakeIcon);
+        _takeIcon.Complete += HangOn;
         _isDoctorHang = false;
-
-        if (_tempTakeIcon == null)
-        {
-            _tempTakeIcon = Instantiate(_originalTakeIcon, _originalTakeIcon.transform.parent);
-            _tempTakeIcon.Complete += HangOn;
-        }
     }
 
     private void FixedUpdate()
@@ -55,9 +47,8 @@ public class HangTransition : Transition
                 if (_isDoctorHang == false)
                 {
                     _isDoctorHang = true;
-                    _tempTakeIcon.FillIcon.rectTransform.localPosition = _tempTakeIcon.FillIcon.rectTransform.TransformPoint(transform.position) * Multiplier;
-                    _tempTakeIcon.gameObject.SetActive(true);
-                    _tempTakeIcon.PrepairActivate(_hangTime);
+                    _takeIcon.transform.position = new Vector3(transform.position.x, transform.position.y + Offset, transform.position.z);
+                    _takeIcon.PrepairActivate(_hangTime);
                 }
 
                 return;
@@ -67,7 +58,7 @@ public class HangTransition : Transition
         {
             if (NeedTransit == false)
             {
-                _tempTakeIcon.PrepairDeactivate();
+                _takeIcon.PrepairDeactivate();
                 _isDoctorHang = false;
             }
         }
@@ -75,7 +66,7 @@ public class HangTransition : Transition
 
     private void HangOn()
     {
-        _tempTakeIcon.Complete -= HangOn;
+        _takeIcon.Complete -= HangOn;
         ChangeTransitStatus();
         SickCharacter.HangOn();
     }

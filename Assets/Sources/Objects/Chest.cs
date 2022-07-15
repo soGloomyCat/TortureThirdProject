@@ -5,19 +5,21 @@ using UnityEngine;
 public class Chest : MonoBehaviour
 {
     private const string AnimationLabel = "IsOpen";
+    private const float Offset = 2f;
 
     [SerializeField] private Drug _drug;
-    [SerializeField] private TakeIcon _takeIcon;
+    [SerializeField] private TakeIcon _originalTakeIcon;
     [SerializeField] private float _issueTime;
 
     private Animator _animator;
+    private TakeIcon _takeIcon;
 
     public event Action<Drug> RequiredIssueDrug;
     public event Action<Transform> TransferSpawnPoint;
 
     public void BeginIssue()
     {
-        _takeIcon.gameObject.SetActive(true);
+        _takeIcon.transform.position = new Vector3(transform.position.x, transform.position.y + Offset, transform.position.z);
         _takeIcon.PrepairActivate(_issueTime);
     }
 
@@ -36,6 +38,7 @@ public class Chest : MonoBehaviour
     private void OnEnable()
     {
         _animator = GetComponent<Animator>();
+        _takeIcon = Instantiate(_originalTakeIcon);
         _takeIcon.Complete += IssueDrug;
     }
 

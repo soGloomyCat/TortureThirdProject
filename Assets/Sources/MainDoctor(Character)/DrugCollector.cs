@@ -18,6 +18,7 @@ public class DrugCollector : MonoBehaviour
     private List<Drug> _drugs;
     private Rigidbody _rigidbody;
     private Transform _spawnPoint;
+    private bool _isIssueStarted;
 
     public int Fulness => _drugs.Count;
 
@@ -59,6 +60,7 @@ public class DrugCollector : MonoBehaviour
         _animator = GetComponent<Animator>();
         _drugs = new List<Drug>();
         _rigidbody = GetComponent<Rigidbody>();
+        _isIssueStarted = false;
     }
 
     private void OverrideDrugsposition(List<Drug> drugs)
@@ -107,12 +109,10 @@ public class DrugCollector : MonoBehaviour
             _drugs.Clear();
             _animator.SetBool(AnimationTrigger, false);
         }
-    }
 
-    private void OnTriggerStay(Collider interactiveObject)
-    {
-        if (interactiveObject.TryGetComponent(out Chest chest))
+        if (interactiveObject.TryGetComponent(out Chest chest) && _isIssueStarted == false)
         {
+            _isIssueStarted = true;
             chest.BeginIssue();
         }
     }
@@ -120,8 +120,8 @@ public class DrugCollector : MonoBehaviour
     private void OnTriggerExit(Collider interactiveObject)
     {
         if (interactiveObject.TryGetComponent(out Chest chest))
-        {
             chest.StopIssue();
-        }
+
+        _isIssueStarted = false;
     }
 }

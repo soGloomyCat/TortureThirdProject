@@ -9,6 +9,7 @@ public class SickCharacter : MonoBehaviour
     [SerializeField] private Reward _rewardPrefab;
     [SerializeField] private Reward _specialReward;
     [SerializeField] private int _cureCost;
+    [SerializeField] private TakeIcon _takeIcon;
 
     private List<Transform> _wayPoints;
     private List<Transform> _exitWayPoints;
@@ -16,7 +17,6 @@ public class SickCharacter : MonoBehaviour
     private bool _isDrugFounded;
     private Transform _iconPosition;
     private Transform _rewardPosition;
-    private TakeIcon _takeIcon;
 
     public List<Transform> WayPoints => _wayPoints;
     public List<Transform> ExitWayPoints => _exitWayPoints;
@@ -34,7 +34,7 @@ public class SickCharacter : MonoBehaviour
         NeedHangOn?.Invoke(this);
     }
 
-    public void InizializeParameters(Transform way, Transform exitWay, Bench bench, TakeIcon takeIcon)
+    public void InizializeParameters(Transform way, Transform exitWay, Bench bench)
     {
         _wayPoints = new List<Transform>();
         _exitWayPoints = new List<Transform>();
@@ -51,7 +51,6 @@ public class SickCharacter : MonoBehaviour
         }
 
         _isDrugFounded = false;
-        _takeIcon = takeIcon;
     }
 
     public void ShowDisease()

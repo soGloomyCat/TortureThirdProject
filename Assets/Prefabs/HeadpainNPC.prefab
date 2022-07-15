@@ -10520,6 +10520,7 @@ MonoBehaviour:
   _rewardPrefab: {fileID: 2729575860639246632, guid: 64c3abd1dea8bdc49b16471ce3192098, type: 3}
   _specialReward: {fileID: 0}
   _cureCost: 10
+  _takeIcon: {fileID: 1141503919920322608, guid: 8928eb9e37bd56a4cbbf9bc1e424cb6f, type: 3}
 --- !u!114 &7780101301867942561
 MonoBehaviour:
   m_ObjectHideFlags: 0
