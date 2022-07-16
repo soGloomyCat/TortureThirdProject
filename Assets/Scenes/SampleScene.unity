@@ -4145,7 +4145,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _drug: {fileID: -3492687963525823930, guid: 117cbbe44f8194743b6c20c49eecea52, type: 3}
-  _originalTakeIcon: {fileID: 1141503919920322608, guid: 8928eb9e37bd56a4cbbf9bc1e424cb6f, type: 3}
+  _takeIcon: {fileID: 1141503919920322608, guid: 8928eb9e37bd56a4cbbf9bc1e424cb6f, type: 3}
   _issueTime: 1.25
 --- !u!65 &892949769
 BoxCollider:
@@ -5083,7 +5083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _drug: {fileID: -7591563155254843973, guid: a30a95cd5a5a71d45acfafdcee5e22e8, type: 3}
-  _originalTakeIcon: {fileID: 1141503919920322608, guid: 8928eb9e37bd56a4cbbf9bc1e424cb6f, type: 3}
+  _takeIcon: {fileID: 1141503919920322608, guid: 8928eb9e37bd56a4cbbf9bc1e424cb6f, type: 3}
   _issueTime: 1.25
 --- !u!65 &1026942291
 BoxCollider:
@@ -6340,7 +6340,7 @@ MonoBehaviour:
   - {fileID: 792534599}
   _bench: {fileID: 919132148294222141}
   _specialNPC: {fileID: 2628221184154002710, guid: ff2ebf04c85e7714d99247bcbb2850e3, type: 3}
-  _cooldownBetweenSpawn: 7
+  _cooldownBetweenSpawn: 2
 --- !u!4 &1250952122
 Transform:
   m_ObjectHideFlags: 0

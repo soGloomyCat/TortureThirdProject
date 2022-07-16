@@ -77,7 +77,7 @@ public class SickCharacter : MonoBehaviour
             {
                 drug.Use();
                 _isDrugFounded = true;
-                _drugIcon.gameObject.SetActive(false);
+                Destroy(_drugIcon.gameObject);
                 TakeReward();
                 Issued?.Invoke();
                 RepayCure?.Invoke(_cureCost);

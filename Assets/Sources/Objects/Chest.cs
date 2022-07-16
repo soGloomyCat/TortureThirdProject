@@ -8,12 +8,11 @@ public class Chest : MonoBehaviour
     private const float Offset = 2f;
 
     [SerializeField] private Drug _drug;
-    [SerializeField] private TakeIcon _originalTakeIcon;
+    [SerializeField] private TakeIcon _takeIcon;
     [Range(0.1f, 10)]
     [SerializeField] private float _issueTime;
 
     private Animator _animator;
-    private TakeIcon _takeIcon;
 
     public event Action<Drug> RequiredIssueDrug;
     public event Action<Transform> TransferSpawnPoint;
@@ -38,11 +37,11 @@ public class Chest : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_drug == null || _originalTakeIcon == null)
+        if (_drug == null || _takeIcon == null)
             throw new ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
 
         _animator = GetComponent<Animator>();
-        _takeIcon = Instantiate(_originalTakeIcon);
+        _takeIcon = Instantiate(_takeIcon);
         _takeIcon.Complete += IssueDrug;
     }
 
