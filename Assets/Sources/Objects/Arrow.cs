@@ -7,6 +7,12 @@ public class Arrow : MonoBehaviour
     private Quaternion _tempRotate;
     private Vector3 _tempDirection;
 
+    private void OnEnable()
+    {
+        if (_target == null)
+            throw new System.ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
+    }
+
     private void Update()
     {
         _tempDirection = _target.position - transform.position;

@@ -55,6 +55,9 @@ public class SickCollector : MonoBehaviour
 
     private void OnEnable()
     {
+        if (_sickPool == null)
+            throw new ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
+
         _doctor = GetComponent<Doctor>();
         _animator = GetComponent<Animator>();
         _sickCharacters = new List<SickCharacter>();

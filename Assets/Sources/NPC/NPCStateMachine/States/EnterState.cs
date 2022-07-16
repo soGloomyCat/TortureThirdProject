@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class EnterState : State
 {
-    [SerializeField] private float Speed;
+    [Range(1, 5)]
+    [SerializeField] private float _speed;
 
     private List<Transform> _wayPoints;
     private Coroutine _coroutine;
@@ -37,7 +38,7 @@ public class EnterState : State
             tempRotationDirection = tempMoveDirection - transform.position;
             tempRotation = Quaternion.LookRotation(tempRotationDirection, Vector3.up);
             transform.rotation = tempRotation;
-            transform.position = Vector3.MoveTowards(transform.position, tempMoveDirection, Speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, tempMoveDirection, _speed * Time.deltaTime);
 
             if (transform.position == tempMoveDirection)
             {

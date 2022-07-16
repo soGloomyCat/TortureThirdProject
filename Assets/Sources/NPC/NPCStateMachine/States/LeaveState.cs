@@ -7,6 +7,7 @@ public class LeaveState : State
     private const string AnimationTrigger = "IsLeave";
     private const float Offset = 0.5f;
 
+    [Range(1, 5)]
     [SerializeField] private float _speed;
 
     private List<Transform> _wayPoints;

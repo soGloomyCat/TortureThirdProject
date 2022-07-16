@@ -8,6 +8,9 @@ public class ParticleSystemStoper : MonoBehaviour
 
     private void OnEnable()
     {
+        if (_sick == null || _turnedOffParticle == null)
+            throw new System.ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
+
         _sick.Issued += TurnOff;
     }
 

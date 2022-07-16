@@ -8,6 +8,7 @@ public class Reward : MonoBehaviour
     private const float Speed = 4f;
     private const float Offset = 1.5f;
 
+    [Range(0.1f, 10)]
     [SerializeField] private float _lifeTime;
 
     private float _currentTime;

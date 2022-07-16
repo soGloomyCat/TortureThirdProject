@@ -11,6 +11,12 @@ public class NPCSkinSwitcher : MonoBehaviour
 
     private SickCharacter _sickCharacter;
 
+    private void OnEnable()
+    {
+        if (_currentMesh == null || _newMesh == null || _renderer == null || _newMaterial == null)
+            throw new System.ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
+    }
+
     private void Start()
     {
         _sickCharacter = GetComponent<SickCharacter>();

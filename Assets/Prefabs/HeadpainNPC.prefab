@@ -10516,11 +10516,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _needDrug: {fileID: -3492687963525823930, guid: 117cbbe44f8194743b6c20c49eecea52, type: 3}
-  _drugIcon: {fileID: 7488924154522879363}
   _rewardPrefab: {fileID: 2729575860639246632, guid: 64c3abd1dea8bdc49b16471ce3192098, type: 3}
-  _specialReward: {fileID: 0}
-  _cureCost: 10
   _takeIcon: {fileID: 1141503919920322608, guid: 8928eb9e37bd56a4cbbf9bc1e424cb6f, type: 3}
+  _specialReward: {fileID: 0}
+  _drugIcon: {fileID: 1502830609080032277, guid: bfb570eb551cc8a4ba17b20c8de51a4c, type: 3}
+  _cureCost: 10
 --- !u!114 &7780101301867942561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10549,7 +10549,7 @@ MonoBehaviour:
   _transitions:
   - {fileID: 6397307624573218303}
   - {fileID: 8969813483697161035}
-  Speed: 2.5
+  _speed: 2
 --- !u!114 &6397307624573218303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10590,9 +10590,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _nextState: {fileID: 8129215201759268250}
-  _finalRayPoint: {fileID: 2386003389361900462}
   _hangTime: 1
-  _renderer: {fileID: 2958528810292345269}
+  _finalRayPoint: {fileID: 2386003389361900462}
 --- !u!114 &8129215201759268250
 MonoBehaviour:
   m_ObjectHideFlags: 0

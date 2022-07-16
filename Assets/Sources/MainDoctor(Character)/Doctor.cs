@@ -12,4 +12,10 @@ public class Doctor : MonoBehaviour
 
         return false;
     }
+
+    private void OnEnable()
+    {
+        if (_sickCollector == null || _drugCollector == null)
+            throw new System.ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
+    }
 }

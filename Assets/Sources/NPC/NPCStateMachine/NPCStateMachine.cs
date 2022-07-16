@@ -7,6 +7,12 @@ public class NPCStateMachine : MonoBehaviour
     private State _currentState;
     private State _nextState;
 
+    private void OnEnable()
+    {
+        if (_startState == null)
+            throw new System.ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
+    }
+
     private void Start()
     {
         _currentState = _startState;

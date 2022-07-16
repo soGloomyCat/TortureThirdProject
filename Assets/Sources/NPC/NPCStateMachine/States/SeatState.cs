@@ -7,15 +7,13 @@ public class SeatState : State
     private const float Speed = 2f;
     private const float Offset = 0.3f;
 
-    private Bench _bench;
     private Transform _seatPosition;
     private Coroutine _coroutine;
-    private bool _isOccupied;
 
     private void Start()
     {
-        _bench = SickCharacter.Bench;
-        _isOccupied = false;
+        _seatPosition = SickCharacter.SeatPosition;
+        PrepairSitDown();
     }
 
     private void PrepairSitDown()
@@ -47,18 +45,5 @@ public class SeatState : State
         transform.rotation = Quaternion.Euler(transform.rotation.x, 90, transform.rotation.z);
         Animator.SetBool(AnimationTrigger, true);
         transform.position = new Vector3(_seatPosition.position.x, _seatPosition.position.y - Offset, _seatPosition.position.z);
-    }
-
-    private void OnTriggerStay(Collider interactiveObject)
-    {
-        if (interactiveObject.TryGetComponent(out Bench bench) && _isOccupied == false)
-        {
-            if (_bench != null)
-            {
-                _isOccupied = true;
-                _seatPosition = _bench.GetFreeSeat(SickCharacter);
-                PrepairSitDown();
-            }
-        }
     }
 }

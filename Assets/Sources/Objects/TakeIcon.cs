@@ -49,6 +49,12 @@ public class TakeIcon : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        if (_mainIcon == null || _fillIcon == null)
+            throw new ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
+    }
+
     private void ChangeCoroutine(float issueTime)
     {
         if (_coroutine != null)

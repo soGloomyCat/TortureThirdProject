@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,18 +6,19 @@ public class Bench : MonoBehaviour
 {
     [SerializeField] private List<SeatPoint> _seats;
 
-    public Transform GetFreeSeat(SickCharacter sickCharacter)
+    public event Action<Transform> TakeSeatPosition;
+
+    public void GetFreeSeat(SickCharacter sickCharacter)
     {
         foreach (SeatPoint seat in _seats)
         {
             if (seat.IsOccupied == false)
             {
                 seat.OccupySeat(sickCharacter);
-                return seat.Position;
+                TakeSeatPosition?.Invoke(seat.Position);
+                break;
             }
         }
-
-        return null;
     }
 
     public bool CheckPresenceFreeSeat()
@@ -28,5 +30,11 @@ public class Bench : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void OnEnable()
+    {
+        if (_seats == null)
+            throw new ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
     }
 }

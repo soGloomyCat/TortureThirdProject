@@ -54,6 +54,9 @@ public class Drug : MonoBehaviour
 
     private void OnEnable()
     {
+        if (_mountPoint == null || _label == null)
+            throw new System.ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
+
         _joint = GetComponent<CharacterJoint>();
         _rigidbody = GetComponent<Rigidbody>();
         _isUsed = false;

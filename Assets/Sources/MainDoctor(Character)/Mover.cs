@@ -5,7 +5,9 @@ public class Mover : MonoBehaviour
 {
     private const string AnimationLabel = "IsWalk";
 
+    [Range(1, 3)]
     [SerializeField] private float _walkSpeed;
+    [Range(1, 15)]
     [SerializeField] private float _rotateSpeed;
 
     private Animator _animator;

@@ -4,23 +4,25 @@ using UnityEngine;
 
 public class SickCharacter : MonoBehaviour
 {
+    private const float Offset = 1.5f;
+
     [SerializeField] private Drug _needDrug;
-    [SerializeField] private SpriteRenderer _drugIcon;
     [SerializeField] private Reward _rewardPrefab;
-    [SerializeField] private Reward _specialReward;
-    [SerializeField] private int _cureCost;
     [SerializeField] private TakeIcon _takeIcon;
+    [SerializeField] private Reward _specialReward;
+    [SerializeField] private Transform _drugIcon;
+    [Range(0, 50)]
+    [SerializeField] private int _cureCost;
 
     private List<Transform> _wayPoints;
     private List<Transform> _exitWayPoints;
-    private Bench _bench;
-    private bool _isDrugFounded;
-    private Transform _iconPosition;
     private Transform _rewardPosition;
+    private Transform _seatPosition;
+    private bool _isDrugFounded;
 
     public List<Transform> WayPoints => _wayPoints;
     public List<Transform> ExitWayPoints => _exitWayPoints;
-    public Bench Bench => _bench;
+    public Transform SeatPosition => _seatPosition;
     public Drug NeedDrug => _needDrug;
     public bool IsDrugFounded => _isDrugFounded;
     public TakeIcon TakeIcon => _takeIcon;
@@ -28,17 +30,23 @@ public class SickCharacter : MonoBehaviour
     public event Action Issued;
     public event Action<int> RepayCure;
     public event Action<SickCharacter> NeedHangOn;
+    public event Action<SickCharacter> NeedSeatPosition;
+
+    public void GetFreeSeat(Transform seatPosition)
+    {
+        if (_seatPosition == null)
+            _seatPosition = seatPosition;
+    }
 
     public void HangOn()
     {
         NeedHangOn?.Invoke(this);
     }
 
-    public void InizializeParameters(Transform way, Transform exitWay, Bench bench)
+    public void InizializeParameters(Transform way, Transform exitWay)
     {
         _wayPoints = new List<Transform>();
         _exitWayPoints = new List<Transform>();
-        _bench = bench;
 
         for (int i = 0; i < way.childCount; i++)
         {
@@ -51,12 +59,13 @@ public class SickCharacter : MonoBehaviour
         }
 
         _isDrugFounded = false;
+        NeedSeatPosition?.Invoke(this);
     }
 
     public void ShowDisease()
     {
-        _drugIcon.gameObject.transform.position = _iconPosition.position;
-        _drugIcon.gameObject.transform.rotation = _iconPosition.rotation;
+        _drugIcon = Instantiate(_drugIcon);
+        _drugIcon.gameObject.transform.position = new Vector3(transform.position.x, transform.position.y + Offset, transform.position.z);
         _drugIcon.gameObject.SetActive(true);
     }
 
@@ -76,10 +85,15 @@ public class SickCharacter : MonoBehaviour
         }
     }
 
-    public void SetBedPosition(Transform iconPosition, Transform rewardPosition)
+    public void GetBedPosition(Transform rewardPosition)
     {
-        _iconPosition = iconPosition;
         _rewardPosition = rewardPosition;
+    }
+
+    private void OnEnable()
+    {
+        if (_needDrug == null || _drugIcon == null || _rewardPrefab == null || _takeIcon == null)
+            throw new ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
     }
 
     private void TakeReward()

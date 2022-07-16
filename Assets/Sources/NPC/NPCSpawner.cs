@@ -5,12 +5,13 @@ using UnityEngine;
 public class NPCSpawner : MonoBehaviour
 {
     [SerializeField] private List<SickCharacter> _sickCharacters;
-    [SerializeField] private SpecialNPC _specialNPC;
     [SerializeField] private List<Transform> _spawnPoints;
     [SerializeField] private List<Transform> _ways;
     [SerializeField] private List<Transform> _exitWays;
-    [SerializeField] private float _cooldownBetweenSpawn;
     [SerializeField] private Bench _bench;
+    [SerializeField] private SpecialNPC _specialNPC;
+    [Range(1, 10)]
+    [SerializeField] private float _cooldownBetweenSpawn;
 
     private float _currentTime;
     private int _wayIndex;
@@ -24,6 +25,12 @@ public class NPCSpawner : MonoBehaviour
         {
             wayPoints.Add(_ways[_wayIndex].GetChild(i));
         }
+    }
+
+    private void OnEnable()
+    {
+        if (_sickCharacters == null || _spawnPoints == null || _ways == null || _exitWays == null || _bench == null)
+            throw new ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
     }
 
     private void Start()
@@ -53,8 +60,8 @@ public class NPCSpawner : MonoBehaviour
         else
             tempSick = Instantiate(_sickCharacters[sickCharacterIndex], _spawnPoints[_wayIndex]);
 
-        tempSick.InizializeParameters(_ways[_wayIndex], _exitWays[_wayIndex], _bench);
         SpawnedNewSick?.Invoke(tempSick);
+        tempSick.InizializeParameters(_ways[_wayIndex], _exitWays[_wayIndex]);
         _spawnedCount++;
     }
 }
