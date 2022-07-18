@@ -6,8 +6,6 @@ public class NPCSpawner : MonoBehaviour
 {
     [SerializeField] private List<SickCharacter> _sickCharacters;
     [SerializeField] private List<Transform> _spawnPoints;
-    [SerializeField] private List<Transform> _ways;
-    [SerializeField] private List<Transform> _exitWays;
     [SerializeField] private Bench _bench;
     [SerializeField] private SpecialNPC _specialNPC;
     [Range(1, 10)]
@@ -18,20 +16,6 @@ public class NPCSpawner : MonoBehaviour
     private int _spawnedCount;
 
     public event Action<SickCharacter> SpawnedNewSick;
-
-    public void GenerateWayPoints(List<Transform> wayPoints)
-    {
-        for (int i = 0; i < _ways[_wayIndex].childCount; i++)
-        {
-            wayPoints.Add(_ways[_wayIndex].GetChild(i));
-        }
-    }
-
-    private void OnEnable()
-    {
-        if (_sickCharacters == null || _spawnPoints == null || _ways == null || _exitWays == null || _bench == null)
-            throw new ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
-    }
 
     private void Start()
     {
@@ -60,8 +44,8 @@ public class NPCSpawner : MonoBehaviour
         else
             tempSick = Instantiate(_sickCharacters[sickCharacterIndex], _spawnPoints[_wayIndex]);
 
+        tempSick.InizializeParameters(_bench.TakeFreeSeat(tempSick), _spawnPoints[_wayIndex]);
         SpawnedNewSick?.Invoke(tempSick);
-        tempSick.InizializeParameters(_ways[_wayIndex], _exitWays[_wayIndex]);
         _spawnedCount++;
     }
 }

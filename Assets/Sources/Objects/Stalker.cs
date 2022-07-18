@@ -2,15 +2,9 @@ using UnityEngine;
 
 public class Stalker : MonoBehaviour
 {
-    private const float Offset = 7;
+    private const float Offset = 7.5f;
 
     [SerializeField] private Mover _mover;
-
-    private void OnEnable()
-    {
-        if (_mover == null)
-            throw new System.ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
-    }
 
     private void Update()
     {

@@ -10,17 +10,11 @@ public class EventsHandler : MonoBehaviour
     [SerializeField] private NPCSpawner _spawner;
     [SerializeField] private Wallet _wallet;
     [SerializeField] private UIHandler _uIHandler;
-    [SerializeField] private Bench _bench;
 
     private List<SickCharacter> _tempCharacters;
 
     private void OnEnable()
     {
-        if (_drugCollector == null || _sickCollector == null || _drugCollector == null || _sickCollector == null ||
-           _drugCollector == null || _sickCollector == null || _drugCollector == null || _sickCollector == null)
-            throw new System.ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
-
-
         _tempCharacters = new List<SickCharacter>();
 
         foreach (var chest in _chest)
@@ -68,8 +62,6 @@ public class EventsHandler : MonoBehaviour
     {
         sick.RepayCure += _wallet.PrepairChange;
         sick.NeedHangOn += _sickCollector.PrepairHangOnSick;
-        sick.NeedSeatPosition += _bench.GetFreeSeat;
-        _bench.TakeSeatPosition += sick.GetFreeSeat;
         _tempCharacters.Add(sick);
     }
 
@@ -79,8 +71,6 @@ public class EventsHandler : MonoBehaviour
         {
             sick.RepayCure -= _wallet.PrepairChange;
             sick.NeedHangOn -= _sickCollector.PrepairHangOnSick;
-            sick.NeedSeatPosition -= _bench.GetFreeSeat;
-            _bench.TakeSeatPosition -= sick.GetFreeSeat;
         }
     }
 }

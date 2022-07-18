@@ -2,19 +2,15 @@ using UnityEngine;
 
 public class ObjectBreaker : MonoBehaviour
 {
+    private const float YOffset = 0.75f;
+
     [SerializeField] private SickCharacter _sick;
     [SerializeField] private Flasher _flasher;
     [SerializeField] private Transform _flasherPoint;
 
-    private Vector3 _offset;
-
     private void OnEnable()
     {
-        if (_sick == null || _flasher == null || _flasherPoint == null)
-            throw new System.ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
-
         _sick.Issued += TurnOff;
-        _offset = new Vector3(0, .75f, 0);
     }
 
     private void OnDisable()
@@ -29,6 +25,11 @@ public class ObjectBreaker : MonoBehaviour
 
     private void Update()
     {
-        _flasher.transform.position = _flasherPoint.position + _offset;
+        CorrectFlasherPosition();
+    }
+
+    private void CorrectFlasherPosition()
+    {
+        _flasher.transform.position = new Vector3(_flasherPoint.position.x, _flasherPoint.position.y + YOffset, _flasherPoint.position.z);
     }
 }

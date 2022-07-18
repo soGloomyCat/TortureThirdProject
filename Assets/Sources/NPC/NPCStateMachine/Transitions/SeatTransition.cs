@@ -7,8 +7,12 @@ public class SeatTransition : Transition
 
     private void OnEnable()
     {
-        _enterState = GetComponent<EnterState>();
         _enterState.Reached += ChangeTransitStatus;
+    }
+
+    private void Awake()
+    {
+        _enterState = GetComponent<EnterState>();
     }
 
     private void OnDisable()

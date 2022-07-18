@@ -21,10 +21,4 @@ public class UIHandler : MonoBehaviour
     {
         _balanceText.text = balance.ToString();
     }
-
-    private void OnEnable()
-    {
-        if (_dropIcon == null || _balanceText == null)
-            throw new System.ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
-    }
 }

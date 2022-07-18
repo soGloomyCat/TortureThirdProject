@@ -1,10 +1,13 @@
-using UnityEngine;
-
 public class CureTransition : Transition
 {
-    private void OnTriggerEnter(Collider interactiveObject)
+    private void Start()
     {
-        if (interactiveObject.TryGetComponent(out Bed bed))
-            NeedTransit = true;
+        SickCharacter.ReadyForCure += ChangeTransitStatus;
+    }
+
+    public void ChangeTransitStatus()
+    {
+        SickCharacter.ReadyForCure -= ChangeTransitStatus;
+        NeedTransit = true;
     }
 }

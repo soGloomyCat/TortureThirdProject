@@ -1,45 +1,38 @@
 using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(CharacterJoint))]
-[RequireComponent(typeof(Rigidbody))]
 public class Drug : MonoBehaviour
 {
-    private const float Speed = 6f;
-    private const float Offset = 1;
-
-    [SerializeField] private Transform _mountPoint;
     [SerializeField] private string _label;
 
-    private CharacterJoint _joint;
-    private Rigidbody _rigidbody;
-    private Coroutine _coroutine;
-    private Transform _startPoint;
+    private DrugMover _drugMover;
+    private DrugHolder _drugHolder;
     private bool _isUsed;
 
-    public Transform MountPoint => _mountPoint;
-    public Rigidbody Rigidbody => _rigidbody;
     public bool IsUsed => _isUsed;
     public string Label => _label;
 
+    private void Awake()
+    {
+        _drugMover = GetComponent<DrugMover>();
+        _drugHolder = GetComponent<DrugHolder>();
+        _isUsed = false;
+    }
+
     public void ChangeStartPoint(Transform startPosition)
     {
-        _startPoint = startPosition;
+        _drugMover.ChangeStartPoint(startPosition);
     }
 
     public void PrepairPutIn(Transform finalPosition, Rigidbody rigidbody)
     {
-        if (_coroutine != null)
-            StopCoroutine(_coroutine);
-
-        _coroutine = StartCoroutine(PutIn(finalPosition, rigidbody));
+        _drugMover.PrepairPutIn(finalPosition, rigidbody);
     }
 
     public void InizializeParameters(Transform MountPosition, Rigidbody connectedBody)
     {
         transform.position = MountPosition.position;
-        _joint.connectedBody = connectedBody;
-        _rigidbody.isKinematic = false;
+        _drugHolder.InizializeParameters(connectedBody);
     }
 
     public void Use()
@@ -52,39 +45,13 @@ public class Drug : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnEnable()
+    public Transform GetMountPoint()
     {
-        if (_mountPoint == null || _label == null)
-            throw new System.ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
-
-        _joint = GetComponent<CharacterJoint>();
-        _rigidbody = GetComponent<Rigidbody>();
-        _isUsed = false;
+        return _drugMover.MountPoint;
     }
 
-    private IEnumerator PutIn(Transform finalPosition, Rigidbody rigidbody)
+    public Rigidbody GetConnectedBody()
     {
-        Vector3 tempDirection;
-
-        rigidbody.isKinematic = true;
-        transform.position = _startPoint.position;
-        tempDirection = new Vector3(transform.position.x, finalPosition.position.y - Offset, transform.position.z);
-
-        while (transform.position != tempDirection)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, tempDirection, Speed * Time.deltaTime);
-            yield return null;
-        }
-
-        while (transform.position != finalPosition.position)
-        {
-            transform.position = Vector3.MoveTowards(transform.position, finalPosition.position, Speed * Time.deltaTime);
-            yield return null;
-        }
-
-        InizializeParameters(finalPosition, rigidbody);
-
-        if (rigidbody.TryGetComponent(out DrugCollector drugCollector) == false)
-            rigidbody.isKinematic = false;
+        return _drugHolder.Rigidbody;
     }
 }

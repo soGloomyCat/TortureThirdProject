@@ -8,24 +8,48 @@ public class Chest : MonoBehaviour
     private const float Offset = 2f;
 
     [SerializeField] private Drug _drug;
-    [SerializeField] private TakeIcon _takeIcon;
     [Range(0.1f, 10)]
     [SerializeField] private float _issueTime;
+    [SerializeField] private TakeIcon _takeIcon;
 
+    private Timer _timer;
     private Animator _animator;
 
     public event Action<Drug> RequiredIssueDrug;
     public event Action<Transform> TransferSpawnPoint;
 
+    private void OnEnable()
+    {
+        _takeIcon.Completed += IssueDrug;
+    }
+
+    private void Awake()
+    {
+        _timer = new Timer();
+        _animator = GetComponent<Animator>();
+        _takeIcon = Instantiate(_takeIcon);
+        _takeIcon.Init(_timer);
+    }
+
+    private void OnDisable()
+    {
+        _takeIcon.Completed -= IssueDrug;
+    }
+
     public void BeginIssue()
     {
         _takeIcon.transform.position = new Vector3(transform.position.x, transform.position.y + Offset, transform.position.z);
-        _takeIcon.PrepairActivate(_issueTime);
+        _timer.StartCountdown(_issueTime);
+    }
+
+    public void ContinueIssue()
+    {
+        _timer.Tick(Time.deltaTime);
     }
 
     public void StopIssue()
     {
-        _takeIcon.PrepairDeactivate();
+        _timer.Stop();
     }
 
     private void IssueDrug()
@@ -33,20 +57,5 @@ public class Chest : MonoBehaviour
         _animator.SetTrigger(AnimationLabel);
         TransferSpawnPoint?.Invoke(transform);
         RequiredIssueDrug?.Invoke(_drug);
-    }
-
-    private void OnEnable()
-    {
-        if (_drug == null || _takeIcon == null)
-            throw new ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
-
-        _animator = GetComponent<Animator>();
-        _takeIcon = Instantiate(_takeIcon);
-        _takeIcon.Complete += IssueDrug;
-    }
-
-    private void OnDisable()
-    {
-        _takeIcon.Complete -= IssueDrug;
     }
 }

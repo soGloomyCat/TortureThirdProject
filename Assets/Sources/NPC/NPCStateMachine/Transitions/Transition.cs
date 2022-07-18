@@ -10,11 +10,8 @@ public abstract class Transition : MonoBehaviour
     public State NextState => _nextState;
     public bool NeedTransit { get; protected set; }
 
-    private void OnEnable()
+    private void Awake()
     {
-        if (_nextState == null)
-            throw new System.ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
-
         SickCharacter = GetComponent<SickCharacter>();
         NeedTransit = false;
     }

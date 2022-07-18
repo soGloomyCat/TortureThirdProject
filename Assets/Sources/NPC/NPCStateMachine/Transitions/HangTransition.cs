@@ -8,28 +8,34 @@ public class HangTransition : Transition
     [SerializeField] private float _hangTime;
     [SerializeField] private Transform _finalRayPoint;
 
+    private Timer _timer;
     private TakeIcon _takeIcon;
     private bool _isDoctorHang;
 
     private void Start()
     {
-        if (_finalRayPoint == null)
-            throw new System.ArgumentNullException("Отсутствует обязательный компонент. Проверьте инспектор.");
-
-        _isDoctorHang = false;
+        _timer = new Timer();
         _takeIcon = Instantiate(SickCharacter.TakeIcon);
-        _takeIcon.Complete += HangOn;
+        _takeIcon.Init(_timer);
+        _takeIcon.Completed += HangOn;
+        _isDoctorHang = false;
     }
 
     private void FixedUpdate()
     {
         DetermineDoctor();
+
+        if (_isDoctorHang)
+            _timer.Tick(Time.deltaTime);
+        else
+            _timer.Stop();
+
     }
 
     private void ChangeTransitStatus()
     {
-        NeedTransit = true;
         Destroy(_takeIcon.gameObject);
+        NeedTransit = true;
     }
 
     private void DetermineDoctor()
@@ -45,31 +51,22 @@ public class HangTransition : Transition
 
         if (Physics.Raycast(tempRay, out tempHit, rayLengt))
         {
-            if (tempHit.transform.TryGetComponent(out SickCollector sickCollector))
+            if (tempHit.transform.TryGetComponent(out SickCollector sickCollector) && _isDoctorHang == false)
             {
-                if (_isDoctorHang == false)
-                {
-                    _isDoctorHang = true;
-                    _takeIcon.transform.position = new Vector3(transform.position.x, transform.position.y + Offset, transform.position.z);
-                    _takeIcon.PrepairActivate(_hangTime);
-                }
-
-                return;
+                _isDoctorHang = true;
+                _takeIcon.transform.position = new Vector3(transform.position.x, transform.position.y + Offset, transform.position.z);
+                _timer.StartCountdown(_hangTime);
             }
         }
         else
         {
-            if (NeedTransit == false)
-            {
-                _takeIcon.PrepairDeactivate();
-                _isDoctorHang = false;
-            }
+            _isDoctorHang = false;
         }
     }
 
     private void HangOn()
     {
-        _takeIcon.Complete -= HangOn;
+        _takeIcon.Completed -= HangOn;
         ChangeTransitStatus();
         SickCharacter.HangOn();
     }

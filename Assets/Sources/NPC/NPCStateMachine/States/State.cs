@@ -1,14 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(NPCAnimationHandler))]
 [RequireComponent(typeof(SickCharacter))]
+[RequireComponent(typeof(NPCLocationHandler))]
 public abstract class State : MonoBehaviour
 {
     [SerializeField] private List<Transition> _transitions;
 
-    protected Animator Animator;
-    protected SickCharacter SickCharacter;
+    protected NPCAnimationHandler SickAnimator { get; private set; }
+    protected SickCharacter SickCharacter { get; private set; }
+    protected NPCLocationHandler LocationHandler { get; private set; }
+
+    private void Awake()
+    {
+        SickAnimator = GetComponent<NPCAnimationHandler>();
+        SickCharacter = GetComponent<SickCharacter>();
+        LocationHandler = GetComponent<NPCLocationHandler>();
+    }
 
     public void InizializeState()
     {
@@ -46,11 +55,5 @@ public abstract class State : MonoBehaviour
         }
 
         return null;
-    }
-
-    private void OnEnable()
-    {
-        Animator = GetComponent<Animator>();
-        SickCharacter = GetComponent<SickCharacter>();
     }
 }
