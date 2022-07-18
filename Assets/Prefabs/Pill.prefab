@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 481753053721576869}
   - component: {fileID: 2399134992406425967}
   - component: {fileID: -3492687963525823930}
+  - component: {fileID: 7606839086760024919}
+  - component: {fileID: 6352971619876193955}
   - component: {fileID: 8306138182613989991}
   - component: {fileID: 3162816589014622134}
   - component: {fileID: 5573040524219243892}
@@ -98,8 +100,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb5866cd97a7d248945efc28abe11f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mountPoint: {fileID: 4171558312098090949}
   _label: Pill
+--- !u!114 &7606839086760024919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4200605972365283514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ed3e2b687a5964bbc02e2ffadc4678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6352971619876193955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4200605972365283514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e6517f53b928c49ac4eb6f448b5c51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mountPoint: {fileID: 4171558312098090949}
 --- !u!65 &8306138182613989991
 BoxCollider:
   m_ObjectHideFlags: 0

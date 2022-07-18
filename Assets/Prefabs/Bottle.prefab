@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6650490060149389492}
   - component: {fileID: 2271081092873091566}
   - component: {fileID: -7591563155254843973}
+  - component: {fileID: 5981495722859710767}
+  - component: {fileID: 6111403696042812444}
   - component: {fileID: 3998925174335898342}
   - component: {fileID: 6203724711027856901}
   - component: {fileID: 3994223514558201536}
@@ -100,8 +102,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb5866cd97a7d248945efc28abe11f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mountPoint: {fileID: 6213733246868356947}
   _label: Bottle
+--- !u!114 &5981495722859710767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788633837215941696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47ed3e2b687a5964bbc02e2ffadc4678, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6111403696042812444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788633837215941696}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99e6517f53b928c49ac4eb6f448b5c51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mountPoint: {fileID: 6213733246868356947}
 --- !u!65 &3998925174335898342
 BoxCollider:
   m_ObjectHideFlags: 0
