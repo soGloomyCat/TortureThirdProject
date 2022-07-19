@@ -8,14 +8,12 @@ public class SickCharacter : MonoBehaviour
     [Range(0, 50)]
     [SerializeField] private int _cureCost;
     [SerializeField] private Drug _needDrug;
-    [SerializeField] private TakeIcon _takeIcon;
 
     private NavMeshAgent _agent;
     private bool _isDrugFounded;
 
     public int CureCost => _cureCost;
     public Drug NeedDrug => _needDrug;
-    public TakeIcon TakeIcon => _takeIcon;
     public NavMeshAgent Agent => _agent;
     public bool IsDrugFounded => _isDrugFounded;
 

@@ -35,7 +35,7 @@ public abstract class State : MonoBehaviour
         enabled = false;
     }
 
-    public bool Check—ompletionState()
+    public bool ReadyToTransit()
     {
         foreach (Transition transition in _transitions)
         {

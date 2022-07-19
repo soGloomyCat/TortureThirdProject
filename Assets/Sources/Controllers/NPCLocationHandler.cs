@@ -11,10 +11,14 @@ public class NPCLocationHandler : MonoBehaviour
     public Transform ExitPosition => _exitPosition;
     public Transform BedPosition => _bedPosition;
 
+    private void OnEnable()
+    {
+        _sickCharacter.SeatDefined += OnPositionDefined;
+    }
+
     private void Awake()
     {
         _sickCharacter = GetComponent<SickCharacter>();
-        _sickCharacter.SeatDefined += OnPositionDefined;
     }
 
     private void OnDisable()

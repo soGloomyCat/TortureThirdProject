@@ -9,6 +9,7 @@ public class Mover : MonoBehaviour
     [SerializeField] private float _rotateSpeed;
 
     private DoctorAnimationHandler _animationHandler;
+    private Quaternion _rotateDirection;
 
     private void Awake()
     {
@@ -17,32 +18,23 @@ public class Mover : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
         {
-            Move(Vector3.forward, Quaternion.Euler(0, 0, 0));
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            Move(Vector3.left, Quaternion.Euler(0, -90, 0));
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            Move(Vector3.back, Quaternion.Euler(0, 180, 0));
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            Move(Vector3.right, Quaternion.Euler(0, 90, 0));
-        }
-
-        if (Input.anyKey)
+            Move();
             _animationHandler.EnableMoveAnimation();
+        }
         if (Input.anyKey == false)
+        {
             _animationHandler.DisableMoveAnimation();
+        }
     }
 
-    private void Move(Vector3 moveDirection, Quaternion rotateDirection)
+    private void Move()
     {
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + moveDirection, _walkSpeed * Time.deltaTime);
-        transform.rotation = Quaternion.Lerp(transform.rotation, rotateDirection, _rotateSpeed * Time.deltaTime);
+        var horizontal = Input.GetKey(KeyCode.A) ? -1 : Input.GetKey(KeyCode.D) ? 1 : 0;
+        var vertical = Input.GetKey(KeyCode.S) ? -1 : Input.GetKey(KeyCode.W) ? 1 : 0;
+        var direction = new Vector3(horizontal, 0, vertical);
+        transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, _walkSpeed * Time.deltaTime);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(transform.position + direction * _rotateSpeed), _rotateSpeed * Time.deltaTime);
     }
 }

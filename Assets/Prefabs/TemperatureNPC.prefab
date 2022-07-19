@@ -391,7 +391,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _cureCost: 10
   _needDrug: {fileID: -7591563155254843973, guid: a30a95cd5a5a71d45acfafdcee5e22e8, type: 3}
-  _takeIcon: {fileID: 1141503919920322608, guid: 8928eb9e37bd56a4cbbf9bc1e424cb6f, type: 3}
 --- !u!114 &7832173600517360222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,6 +477,7 @@ MonoBehaviour:
   _nextState: {fileID: 8486394652298016932}
   _hangTime: 1
   _finalRayPoint: {fileID: 837530351659494137}
+  _takeIcon: {fileID: 1141503919920322608, guid: 8928eb9e37bd56a4cbbf9bc1e424cb6f, type: 3}
 --- !u!114 &8486394652298016932
 MonoBehaviour:
   m_ObjectHideFlags: 0

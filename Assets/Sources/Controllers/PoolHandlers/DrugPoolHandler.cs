@@ -10,8 +10,8 @@ public class DrugPoolHandler : MonoBehaviour
 
     private DrugCollector _collector;
     private List<Drug> _drugs;
-    private Transform _spawnPoint;
     private Drug _lastDrug;
+    private Transform _spawnPoint;
 
     public int Fulness => _drugs.Count;
     public List<Drug> Drugs => _drugs;

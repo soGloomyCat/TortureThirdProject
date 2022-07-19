@@ -7,15 +7,15 @@ public class HangTransition : Transition
     [Range(0.1f, 5)]
     [SerializeField] private float _hangTime;
     [SerializeField] private Transform _finalRayPoint;
+    [SerializeField] private TakeIcon _takeIcon;
 
     private Timer _timer;
-    private TakeIcon _takeIcon;
     private bool _isDoctorHang;
 
     private void Start()
     {
         _timer = new Timer();
-        _takeIcon = Instantiate(SickCharacter.TakeIcon);
+        _takeIcon = Instantiate(_takeIcon);
         _takeIcon.Init(_timer);
         _takeIcon.Completed += HangOn;
         _isDoctorHang = false;

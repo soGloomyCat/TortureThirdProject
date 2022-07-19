@@ -19,7 +19,8 @@ public class CureState : State
 
     private void OnDisable()
     {
-        Destroy(_drugIcon.gameObject);
+        if (_drugIcon.gameObject.activeSelf)
+            Destroy(_drugIcon.gameObject);
     }
 
     private void Start()
@@ -47,6 +48,7 @@ public class CureState : State
                 drug.Use();
                 SickCharacter.Issue();
                 TakeReward();
+                SickCharacter.CureStarted -= FoundCorrectnessDrug;
                 break;
             }
         }

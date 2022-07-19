@@ -10,7 +10,7 @@ Material:
   m_Name: Bush
   m_Shader: {fileID: 4800000, guid: bee44b4a58655ee4cbff107302a3e131, type: 3}
   m_ShaderKeywords: DR_GRADIENT_ON DR_RIM_ON DR_SPECULAR_ON _CELPRIMARYMODE_SINGLE
-    _TEXTUREBLENDINGMODE_MULTIPLY _UNITYSHADOWMODE_NONE
+    _TEXTUREBLENDINGMODE_MULTIPLY _UNITYSHADOWMODE_COLOR
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -112,21 +112,21 @@ Material:
     - _TextureBlendingMode: 0
     - _TextureImpact: 1
     - _UVSec: 0
-    - _UnityShadowMode: 0
+    - _UnityShadowMode: 2
     - _UnityShadowPower: 0.2
     - _UnityShadowSharpness: 1
     - _VertexColorsEnabled: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 0.27842647, g: 0.6226415, b: 0.32760003, a: 1}
-    - _ColorDim: {r: 0.20377359, g: 0.509434, b: 0.24743934, a: 1}
+    - _Color: {r: 0.37112376, g: 0.6415094, b: 0.28686363, a: 1}
+    - _ColorDim: {r: 0.30625376, g: 0.5849056, b: 0.2174083, a: 1}
     - _ColorDimCurve: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
     - _ColorDimExtra: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
     - _ColorDimSteps: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
-    - _ColorGradient: {r: 0.02691348, g: 0.1981132, b: 0.04118011, a: 1}
+    - _ColorGradient: {r: 0.04594612, g: 0.2264151, b: 0.017942311, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FlatRimColor: {r: 0.28686363, g: 0.6415094, b: 0.32292926, a: 1}
     - _FlatSpecularColor: {r: 0.34021002, g: 0.6509434, b: 0.38578427, a: 1}
     - _LightmapDirection: {r: 0, g: 1, b: 0, a: 0}
-    - _UnityShadowColor: {r: 0.85023, g: 0.85034, b: 0.85045, a: 0.85056}
+    - _UnityShadowColor: {r: 0.18163352, g: 0.4339623, b: 0.0998932, a: 1}
   m_BuildTextureStacks: []

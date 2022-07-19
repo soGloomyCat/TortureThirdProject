@@ -15,7 +15,7 @@ public class NPCStateMachine : MonoBehaviour
 
     private void Update()
     {
-        if (_currentState.Check—ompletionState())
+        if (_currentState.ReadyToTransit())
             TransitCurrentState();
     }
 

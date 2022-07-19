@@ -60,7 +60,7 @@ public class EventsHandler : MonoBehaviour
 
     private void SubscribeSick(SickCharacter sick)
     {
-        sick.RepayCure += _wallet.PrepairChange;
+        sick.RepayCure += _wallet.ChangeBalance;
         sick.NeedHangOn += _sickCollector.PrepairHangOnSick;
         _tempCharacters.Add(sick);
     }
@@ -69,7 +69,7 @@ public class EventsHandler : MonoBehaviour
     {
         foreach (var sick in _tempCharacters)
         {
-            sick.RepayCure -= _wallet.PrepairChange;
+            sick.RepayCure -= _wallet.ChangeBalance;
             sick.NeedHangOn -= _sickCollector.PrepairHangOnSick;
         }
     }
